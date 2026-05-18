@@ -1,5 +1,5 @@
 # Parabolic-Reflector-for-Lithotripsy
 This script visualizes how a parabolic reflector focuses خد incoming shockwaves onto a single focal point (the kidney stone). 
 
-#Code Explanation 
+# Code Explanation 
 Mathematical Model: The script uses the standard equation for an upward-opening parabola, $y = \frac{x^2}{4f}$, where $f$ represents the focal length.Target Placement: In a clinical lithotripsy scenario, the objective is to destroy the calculus without damaging surrounding tissue. The script plots a red marker exactly at the coordinate $(0, f)$, simulating the precise alignment of the kidney stone.Ray Tracing Logic: The for loop simulates multiple sound waves (shockwaves) entering the reflector parallel to the axis of symmetry. According to the geometric properties of a parabola, any wave traveling parallel to the central axis will reflect off the surface and travel directly to the focal point. The green dashed lines (g--) represent the incoming energy, and the magenta solid lines (m-) represent the concentrated energy hitting the stone. 
