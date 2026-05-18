@@ -1,0 +1,49 @@
+% =========================================================================
+% MATLAB Simulation: Parabolic Reflector for Lithotripsy
+% Description: This script visualizes how a parabolic reflector focuses
+% incoming shockwaves onto a single focal point (the kidney stone).
+% =========================================================================
+
+clc; clear; close all;
+
+% 1. Define the Parabola Parameters
+f = 5;                        % Focal length (Position of the kidney stone)
+x = linspace(-12, 12, 100);   % X-axis range for the reflector shape
+y = (1/(4*f)) * x.^2;         % Equation of the parabola: y = x^2 / (4f)
+
+% 2. Plot the Parabolic Reflector (The Lithotripter Bowl)
+figure('Name', 'Lithotripsy Simulation', 'Color', 'w');
+plot(x, y, 'b-', 'LineWidth', 2.5);
+hold on;
+
+% 3. Plot the Focal Point (The Kidney Stone)
+% The focus of y = ax^2 is located at (0, f)
+plot(0, f, 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'r');
+text(0.5, f + 0.8, 'Kidney Stone (Target)', 'Color', 'r', 'FontWeight', 'bold');
+
+% 4. Simulate the Shockwaves (Ray Tracing)
+num_rays = 9;                           % Number of shockwaves to simulate
+x_rays = linspace(-10, 10, num_rays);   % Origin points of the incoming waves
+
+for i = 1:num_rays
+    x0 = x_rays(i);
+    y0 = (1/(4*f)) * x0^2; % The exact point where the wave hits the reflector
+    
+    % Draw incoming shockwave (entering the bowl)
+    p1 = plot([x0, x0], [f+10, y0], 'g--', 'LineWidth', 1.5);
+    
+    % Draw reflected shockwave (focusing on the stone)
+    p2 = plot([x0, 0], [y0, f], 'm-', 'LineWidth', 1.5);
+end
+
+% 5. Formatting and Display Options
+title('Shockwave Focusing Using a Parabolic Reflector', 'FontSize', 14);
+xlabel('Distance (cm)', 'FontSize', 11);
+ylabel('Height (cm)', 'FontSize', 11);
+axis equal; % Ensures the geometric proportions are correct
+grid on;
+
+% Add Legend
+legend([p1, p2], {'Incoming Shockwaves', 'Reflected Waves (Focused)'}, ...
+       'Location', 'northoutside', 'Orientation', 'horizontal');
+hold off;
